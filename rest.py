@@ -57,7 +57,27 @@ def recommend(filename, price, cuisine):
 
         [[82, 'Queen St. Cafe'], [71, 'Dumplings R Us']]
     """
+
+    # read file into dictionaries
+    names2rating, price2names, cuisine2names = read_dictionaries(filename)
+
+    # filter names by price
+    names_by_price = filter_by_price(price2names, price)
+
+    # select from names_by_price those with cuisine
+    names_with_cuisine = select_by_cuisine(names_by_price, cuisine)
+
+    # sort by the restaurants by rating
+    result = sort_by_rating(names_with_cuisine, names2rating)
+    return result
+
+
+
     
 if __name__ == '__main__':
+    # run test code if called from command line
     # Hard coded FILENAME
     FILENAME = restaurant_small.txt
+
+    results = recommend(FILENAME, '$', ['Chinese', 'Thai'])
+    print results
