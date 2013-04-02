@@ -1,3 +1,8 @@
+<<<<<<< .merge_file_aaf8zD
+=======
+
+
+>>>>>>> .merge_file_eXoChD
 
 
 def is_palindrome1(s):
