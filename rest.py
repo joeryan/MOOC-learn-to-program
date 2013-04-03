@@ -43,7 +43,7 @@ def recommend(filename, price, cuisine):
     names_by_price = filter_by_price(price2names, price)
 
     # select from names_by_price those with cuisine
-    names_with_cuisine = select_by_cuisine(names_by_price, cuisine, cuisine2names)
+    names_with_cuisine = filter_by_cuisine(names_by_price, cuisine, cuisine2names)
 
     # sort by the restaurants by rating
     result = sort_by_rating(names_with_cuisine, names2rating)
@@ -105,17 +105,29 @@ def filter_by_price(price2names, price):
     return price2names[price]
 
 
-def filter_by_cuisine(names, cuisine, names2cuisines):
+def filter_by_cuisine(names, cuisine, cuisine2names):
     """ (list of str, list of str, {str: list of str}) -> list of str
 
     given a list of restaurant names, a list of cuisines, and a dictionary of
     restaurants with cuisines; function returns a list of retaurants
     """
     result = []
-    for restaurant in names:
-        for cus in cuisine:
-            if cus in names2cusine[restaurant] and restaurant not in result:
+    for cus in cuisine:
+        for restaurant in names:
+            if restaurant in cuisine2names[cus] and restaurant not in result:
                 result.append(restaurant)
 
     return result
 
+def sort_by_rating(names_with_cuisine, names2rating):
+    """ (list of str, {str: str}) -> list of lists
+
+        given a list of restaurants, and a list of (ratings and restaurants) the
+        function returns a sorted list of ratings and restaurants
+    """
+
+    result = []
+    for name in names2rating.keys():
+        if name in names_with_cuisine:
+            result.append([int(names2rating[name]), name])
+    return result
