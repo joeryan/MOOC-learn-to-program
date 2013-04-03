@@ -98,11 +98,3 @@ def read_dictionaries(filename):
         
 
 
-if __name__ == '__main__':
-    # run test code if called from command line
-    # Hard coded FILENAME
-    FILENAME = open('/home/joe/projects/python/MOOC-learn-to-program/restaurants_small.txt', 'r')
-
-    name2rating, price2name, cusine2name = read_dictionaries(FILENAME)
-    # results = recommend(FILENAME, '$', ['Chinese', 'Thai'])
-    print (name2rating, price2name, cusine2name)
