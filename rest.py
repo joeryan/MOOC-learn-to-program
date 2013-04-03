@@ -95,6 +95,14 @@ def read_dictionaries(filename):
     return (name2rating, price2name, cuisine2name)
         
     
-        
+def filter_by_price(price2names, price):
+    """ ({str: list of str}, str) -> list of str
 
+    given a dictionary {str: list of str} and price level ('$'..'$$$$'),
+    function returns a list of retaurants matching the provided price point
+    """
+
+    return price2names[price]
+
+    
 
