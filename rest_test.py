@@ -6,9 +6,26 @@ class TestRestaurantReccommend (unittest.TestCase):
     
     def test_read_dictionaries(self):
         FILENAME = open("restaurant_small.txt", 'r')
-        expected_price2name = { }
-        expected_name2cuisine= {}
-        expected_name2rating= {}
+        expected_name2rating = {'Queen St. Cafe': '82',
+                               'Deep Fried Everything': '52',
+                               'Mexican Grill': '85',
+                               'Georgie Porgie': '87',
+                               'Dumplings R Us': '71'}
+        
+        expected_name2cuisine = {'Mexican': ['Mexican Grill'],
+                                 'Chinese': ['Dumplings R Us'],
+                                 'Canadian': ['Georgie Porgie'],
+                                 'Pub Food': ['Georgie Porgie', 'Deep Fried Everything'],
+                                 'Malaysian': ['Queen St. Cafe'],
+                                 'Thai': ['Queen St. Cafe']}
+        
+        expected_price2name = {'$$': ['Mexican Grill'],
+                               '$$$$': [],
+                               '$': ['Queen St. Cafe',
+                                     'Dumplings R Us',
+                                     'Deep Fried Everything'],
+                               '$$$': ['Georgie Porgie']}
+
         name2rating, price2name, name2cuisine = rest.read_dictionaries(FILENAME)
 
         self.assertEqual(expected_name2rating, name2rating)
@@ -16,8 +33,10 @@ class TestRestaurantReccommend (unittest.TestCase):
         self.assertEqual(expected_name2cuisine, name2cuisine)
 
     def test_filter_by_price(self):
-        expected_namesbyprice = {}
-        price2name = {}
+        expected_namesbyprice = ['Queen St. Cafe',
+                                     'Dumplings R Us',
+                                     'Deep Fried Everything']
+        price2name = []
         price = '$'
         namesbyprice = rest.filter_by_price(price2name, price)
 
