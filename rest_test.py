@@ -2,7 +2,7 @@ import rest
 import unittest
 
 
-class TestRestaurantReccommend (Unittest.TestCase):
+class TestRestaurantReccommend (unittest.TestCase):
     
     def test_read_dictionaries(self):
         FILENAME = open("restaurant_small.txt", 'r')
