@@ -119,24 +119,56 @@ def filter_by_cuisine(names, cuisine, names2cuisines):
 
     return result
 
+def sort_by_rating(names_with_cuisine, names2rating):
+    result = []
+    for name in names_with_cuisine:
+        if name in names2rating.keys():
+            result.append([int(names2rating[name]), name])
+
+   
+    return result
+            
+
 if __name__ == '__main__':
+    # Get filename and price from stdin
     filename = input("Enter filename of restaurants data: ")
     price = input('Enter price range ($, $$, $$$, $$$$): ')
-    cuisines = []
-    choice = input('Enter cuisines (blank for end): ')
-    if choice != '':
-        while choice != '':
-            cuisines.append(choice)
-            choice = input('Enter cuisines (blank for end): ')
-    else:
-        print("You muust enter a cuisine choice!")
-        exit
-        
-    filename = open(filename, 'r')
-    result = recommend(filename, price, cuisines)
-    print('Here is a list of restaurants with those characteristics:')
-    for item in result:
-        print(item[0], "\t\t", item[1])
 
-    print('I hope you enjoy your meal.')
-    
+    # check validity of price and raise error if invalid
+    try:
+        if price not in ['$', '$$', '$$$', '$$$$']:
+            myError= "You must enter a price of: '$', '$$', '$$$', or '$$$$'"
+            raise TypeError
+
+    # Get list of cuisines from stdin, raise error if first entry is empty
+        cuisines = []
+        choice = input('Enter cuisines (blank for end): ')
+        if choice != '':
+            while choice != '':
+                cuisines.append(choice)
+                choice = input('Enter cuisines (blank for end): ')
+        else:
+            myError = "You muust enter a cuisine choice!"
+            raise TypeError
+
+        # open provided filename, should have try/except
+        filename = open(filename, 'r')
+        result = recommend(filename, price, cuisines)
+
+        # Check for any results and print if non-empty list
+        if result = []:
+            print("Sorry, No matching restaurants found.")
+        else:
+            result.sort(reverse=True)
+            print('Here is a list of restaurants with those characteristics:')
+            for item in result:
+                print(item[0], "\t\t", item[1])
+
+            print('I hope you enjoy your meal.')
+
+    except:
+        if TypeError:
+            print(myError)
+        if IOError:
+            print("You entered an invalid filename.  Please check your\n",
+                  "file name and try again." )          
