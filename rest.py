@@ -105,16 +105,17 @@ def filter_by_price(price2names, price):
     return price2names[price]
 
 
-def filter_by_cuisine(names, cuisine, names2cuisines):
+def filter_by_cuisine(names, cuisine, cuisine2names):
     """ (list of str, list of str, {str: list of str}) -> list of str
 
     given a list of restaurant names, a list of cuisines, and a dictionary of
     restaurants with cuisines; function returns a list of retaurants
     """
     result = []
-    for restaurant in names:
-        for cus in cuisine:
-            if restaurant in names2cuisines[cus] and restaurant not in result:
+    for cus in cuisine:
+        for restaurant in names:
+            if restaurant in cuisine2names[cus] and restaurant not in result:
+
                 result.append(restaurant)
 
     return result
@@ -172,3 +173,4 @@ if __name__ == '__main__':
         if IOError:
             print("You entered an invalid filename.  Please check your\n",
                   "file name and try again." )          
+
