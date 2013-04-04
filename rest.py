@@ -43,7 +43,7 @@ def recommend(filename, price, cuisine):
     names_by_price = filter_by_price(price2names, price)
 
     # select from names_by_price those with cuisine
-    names_with_cuisine = select_by_cuisine(names_by_price, cuisine, cuisine2names)
+    names_with_cuisine = filter_by_cuisine(names_by_price, cuisine, cuisine2names)
 
     # sort by the restaurants by rating
     result = sort_by_rating(names_with_cuisine, names2rating)
@@ -114,8 +114,29 @@ def filter_by_cuisine(names, cuisine, names2cuisines):
     result = []
     for restaurant in names:
         for cus in cuisine:
-            if cus in names2cusine[restaurant] and restaurant not in result:
+            if restaurant in names2cuisines[cus] and restaurant not in result:
                 result.append(restaurant)
 
     return result
 
+if __name__ == '__main__':
+    filename = input("Enter filename of restaurants data: ")
+    price = input('Enter price range ($, $$, $$$, $$$$): ')
+    cuisines = []
+    choice = input('Enter cuisines (blank for end): ')
+    if choice != '':
+        while choice != '':
+            cuisines.append(choice)
+            choice = input('Enter cuisines (blank for end): ')
+    else:
+        print("You muust enter a cuisine choice!")
+        exit
+        
+    filename = open(filename, 'r')
+    result = recommend(filename, price, cuisines)
+    print('Here is a list of restaurants with those characteristics:')
+    for item in result:
+        print(item[0], "\t\t", item[1])
+
+    print('I hope you enjoy your meal.')
+    
