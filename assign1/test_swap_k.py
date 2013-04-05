@@ -5,6 +5,11 @@ import unittest
 class TestSwapK(unittest.TestCase):
     """ Test class for function a1.swap_k. """
 
+    def test_empty_list(self):
+        L = []
+        a1.swap_k(L, 1)
+        self.assertEqual([], L)
+
     def test_swap_1item_list(self):
         L = [1]
         expectL = [1]

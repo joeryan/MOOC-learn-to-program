@@ -1,5 +1,5 @@
 
-def swap_k(L, k):
+def swap_k1(L, k):
 # indexing error
     if k>len(L)//2 or k<=0:
         L=L
@@ -11,7 +11,7 @@ def swap_k(L, k):
         L.clear()
         L.extend(swapped_list)
 
-def bug_swapk2(L, k):
+def swap_k2(L, k):
     # return, though shouldn't
     if k>len(L)//2 or k<=0:
         L=L
@@ -24,7 +24,7 @@ def bug_swapk2(L, k):
         L.extend(swapped_list)
     return L
 
-def bug_swapk3(L, k):
+def swap_k(L, k):
 
         tmp_beg, tmp_end = [], []
         for i in range(k):
