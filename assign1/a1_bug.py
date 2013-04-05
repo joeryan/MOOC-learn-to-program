@@ -1,5 +1,5 @@
 
-def bug_swapk1(L, k):
+def swap_k(L, k):
 # indexing error
     if k>len(L)//2 or k<=0:
         L=L
