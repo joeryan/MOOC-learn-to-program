@@ -28,11 +28,12 @@ class TestSwapK(unittest.TestCase):
         a1.swap_k(L, 1)
         self.assertEqual(expectL, L)
 
-    def test_swap_multi_item_list(self):
+    def test_swap_multi_items_in_list(self):
         L = [1,2,3,4,5,6,7,8]
         expectL = [6,7,8,4,5,1,2,3]
         a1.swap_k(L, 3)
         self.assertEqual(expectL, L)
+
                             
 
 if __name__ == '__main__':
