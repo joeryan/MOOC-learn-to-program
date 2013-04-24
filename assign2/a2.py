@@ -69,7 +69,7 @@ class Rat:
         """
         return ("%s at (%d, %d) ate %d sprouts." % (self.symbol,
                                                     self.row,
-                                                    self.column,
+                                                    self.col,
                                                     self.num_sprouts_eaten))
 
 
@@ -87,14 +87,20 @@ class Maze:
         self.maze = maze
         self.rat_1 = rat_1
         self.rat_2 = rat_2
-        # self.num_sprouts_left = num_sprouts_left
+        # count number of SPROUTs and create variable num_sprouts_left
+        self.num_sprouts_left = 0
+        for i in range(len(maze)):
+            for j in range(len(maze[i])):
+                if maze[i][j] == SPROUT:
+                    self.num_sprouts_left += 1
+                        
 
     def is_wall(self, row, col):
         """ (Maze, int, int) -> bool
 
         returns True if and only if there is a wall at the given row and column
         """
-        return self[row[col]] == WALL
+        return self.maze[row][col] == WALL
 
     def get_character(self, row, col):
         """ (Maze, int, int) -> str
@@ -141,11 +147,18 @@ class Maze:
         """
         result = ""
         for i in range(len(self.maze)):
-            for column in self.maze[i]:
-                result += column
+            for j in range(len(self.maze[i])):
+                if (self.rat_1.row, self.rat_1.col) == (i, j):
+                    result += self.rat_1.symbol
+                elif (self.rat_2.row, self.rat_2.col) == (i, j):
+                    result += self.rat_2.symbol
+                else:
+                    result += self.maze[i][j]
             result += "\n"
 
         result += self.rat_1.__str__() + "\n"
         result += self.rat_2.__str__()
+
+        return result
         
     
