@@ -9,58 +9,59 @@ import unittest
 
 class TestMazeClass(unittest.TestCase):
     def setUp(self):
-        jen = a2.Rat('J', 1, 1)
-        paul = a2.Rat('P', 1, 4)
-        maze = a2.Maze([['#', '#', '#', '#', '#', '#','#'],
+        self.jen = a2.Rat(a2.RAT_1_CHAR, 1, 1)
+        self.paul = a2.Rat(a2.RAT_2_CHAR, 1, 4)
+        self.maze = a2.Maze([['#', '#', '#', '#', '#', '#','#'],
                     ['#', '.', '.', '.', '.', '.', '#'],
                     ['#', '.', '#', '#', '#', '.', '#'],
                     ['#', '.', '.', '@', '#', '.', '#'],
                     ['#', '@', '#', '.', '@', '.', '#'],
                     ['#', '#', '#', '#', '#', '#', '#']],
-                       jen, paul)
+                       self.jen, self.paul)
 
     # test initialization of rat
     def test_rat_J_symbol(self):
-        assertEqual(jen.symbol, 'J')
+        # self.jen = a2.Rat(a2.RAT_1_CHAR, 1,2)
+        assertEqual(self.jen.symbol, 'J')
 
     def test_rat_J_row(self):
-        assertEqual(jen.row, 1)
+        assertEqual(self.jen.row, 1)
         
     def test_rat_J_column(self):
-        assertEqual(jen.col, 1)
+        assertEqual(self.jen.col, 1)
     
     # test methods of rat
     def test_set_location(self):
-        jen.set_location(1,2)
-        assertEqual((jen.row, jen.col), (1, 2))
+        self.jen.set_location(1,2)
+        assertEqual((self.jen.row, self.jen.col), (1, 2))
 
     def test_eat_sprout(self):
-        jen.eat_sprout()
-        assertEqual(jen.num_sprouts_eaten, 1)
+        self.jen.eat_sprout()
+        assertEqual(self.jen.num_sprouts_eaten, 1)
 
     def test_string_representation__str(self):
         expected_str = "J at (1, 1) ate 0 sprouts."
-        assertEqual(jen.__str__(), expected_str)
+        assertEqual(self.jen.__str__(), expected_str)
 
     # tests for initialization of maze
     def test_rat1_in_maze(self):
-        assertEqual(maze.rat_1, jen)
+        assertEqual(self.maze.rat_1, self.jen)
 
     def test_rat2_in_maze(self):
-        assertEqual(maze.rat_2, paul)
+        assertEqual(self.maze.rat_2, self.paul)
         
     # test methods of maze
     def test_is_wall_on_wall(self):
-        assert maze.is_wall(0,0)
+        assert self.maze.is_wall(0,0)
 
     def test_is_wall_not_on_wall(self):
-        assert not(maze.is_wall(1,2))
+        assert not(self.maze.is_wall(1,2))
 
     def test_get_character(self):
-        assertEqual(maze.get_character(3,4), '@')
+        assertEqual(self.maze.get_character(3,4), a2.SPROUT)
 
     def test_move_a_rat_into_hall(self):
-        assert maze.move(jen, NO_CHANGE, RIGHT)
+        assert self.maze.move(self.jen, a2.NO_CHANGE, a2.RIGHT)
 
     def test_move_rat_into_wall(self):
         assert not(maze.move(paul, DOWN, NO_CHANGE))
